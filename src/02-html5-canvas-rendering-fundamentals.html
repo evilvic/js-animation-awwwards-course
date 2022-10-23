@@ -68,7 +68,39 @@
     function drawFrame(ts) {
 
       ts /= 1000
-      
+
+      // Rectangle
+      const gradient = ctx.createLinearGradient(100, 100, 150, 100)
+      gradient.addColorStop(0, 'red')
+      gradient.addColorStop(1, 'green')
+
+      ctx.fillStyle = gradient
+      ctx.strokeStyle = 'blue'
+      ctx.lineWidth = 5
+
+      // ctx.lineCap = 'round'
+      // ctx.lineJoin = 'round'
+
+      // ctx.rect(100, 100, 50, 50)
+      // ctx.fill()
+      // ctx.stroke()
+
+      ctx.fillRect(100, 100, 50, 50)
+      ctx.strokeRect(100, 100, 50, 50)
+
+      // Circle
+      const circleX = 125
+      const circleY = 250
+      const circleRadius = 50
+      const startAngle = 0
+      const endAngle = Math.PI * 2
+
+      ctx.fillStyle = 'orange'
+
+      ctx.beginPath()
+      ctx.arc(circleX, circleY, circleRadius, startAngle, endAngle)
+      ctx.closePath()
+      ctx.fill()
 
       requestAnimationFrame(drawFrame)
 
