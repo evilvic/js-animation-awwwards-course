@@ -102,6 +102,27 @@
       ctx.closePath()
       ctx.fill()
 
+      // Lines
+      ctx.lineWidth = 1
+      ctx.strokeStyle = 'brown'
+
+      ctx.beginPath()
+      ctx.moveTo(125, 350)
+      ctx.lineTo(175, 350)
+      ctx.lineTo(175, 330)
+      ctx.closePath()
+      ctx.stroke()
+      ctx.fill()
+
+      // Quadratic Curve
+      ctx.lineWidth = 2
+      ctx.strokeStyle = 'red'
+
+      ctx.beginPath()
+      ctx.moveTo(125, 450)
+      ctx.quadraticCurveTo(150, 400, 175, 450)
+      ctx.stroke()
+
       requestAnimationFrame(drawFrame)
 
     }
