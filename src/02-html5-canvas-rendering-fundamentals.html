@@ -63,11 +63,24 @@
 
     const ctx = canvas.getContext('2d')
 
-    requestAnimationFrame(drawFrame)
-    
+    const image = new Image()
+    const video = document.createElement('video')
+
+    image.onload = function () {
+      video.onloadeddata = function() {
+        video.muted = true
+        video.play()
+        requestAnimationFrame(drawFrame)
+      }
+      video.src = '/assets/sample-video.mp4'
+    }
+    image.src = '/assets/sample-image.jpeg'
+
     function drawFrame(ts) {
 
       ts /= 1000
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       // Rectangle
       const gradient = ctx.createLinearGradient(100, 100, 150, 100)
@@ -122,6 +135,41 @@
       ctx.moveTo(125, 450)
       ctx.quadraticCurveTo(150, 400, 175, 450)
       ctx.stroke()
+
+      // Bezier Curve
+      ctx.lineWidth = 1
+      ctx.strokeStyle = 'green'
+
+      ctx.beginPath()
+
+      const startX = 250
+      const startY = 450
+
+      const cp1x = startX + 50
+      const cp1y = startY - 50
+      const cp2x = startX + 100
+      const cp2y = startY - 50
+      const endX = startX + 150
+      const endY = startY
+
+      ctx.moveTo(startX, startY)
+      ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, endX, endY)
+      ctx.stroke()
+
+      // Text
+      ctx.fillStyle = 'blue'
+      ctx.font = '2rem monospace'
+      ctx.fillText('Hello World', 250, 100)
+
+      ctx.fillStyle = 'blue'
+      ctx.font = '2rem sans-serif'
+      ctx.strokeText('Hello World', 250, 150)
+
+      // Image
+      ctx.drawImage(image, 250, 170, image.naturalWidth * 0.25, image.naturalHeight * 0.25)
+
+      // Video
+      ctx.drawImage(video, 250, 280, video.videoWidth * 0.5, video.videoHeight * 0.5)
 
       requestAnimationFrame(drawFrame)
 
